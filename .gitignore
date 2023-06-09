@@ -2,3 +2,5 @@
 *.iml
 .fleet/
 venv
+venv_wsl
+.ruff_cache

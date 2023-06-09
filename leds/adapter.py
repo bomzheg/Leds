@@ -1,11 +1,13 @@
 from dataclasses import dataclass
 
-import RPi.GPIO as gpio
+import RPi.GPIO as gpio  # type: ignore[import]
+import typing
 
 from leds import dto
 from leds.state import SystemState
 
 COUNT = 7
+
 
 class LedAdapter:
     mapping = {
@@ -25,7 +27,7 @@ class LedAdapter:
         gpio.output(self.mapping[number], gpio.LOW)
 
     def check_state(self, numer: int) -> bool:
-        return gpio.input(self.mapping[numer]) == gpio.HIGH
+        return typing.cast(bool, gpio.input(self.mapping[numer]) == gpio.HIGH)
 
     def setup(self) -> None:
         assert len(self.mapping) == COUNT
@@ -45,7 +47,7 @@ class ButtonAdapter:
     }
 
     def is_pressed(self, number: int) -> bool:
-        return gpio.input(self.mapping[number]) == gpio.HIGH
+        return typing.cast(bool, gpio.input(self.mapping[number]) == gpio.HIGH)
 
     def setup(self) -> None:
         assert len(self.mapping) == COUNT
@@ -69,4 +71,3 @@ class BoardAdapter:
 
     def to_state(self, state: SystemState, event: dto.NewState) -> None:
         pass
-

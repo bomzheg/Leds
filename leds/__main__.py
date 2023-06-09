@@ -6,7 +6,7 @@ from leds.adapter import BoardAdapter, LedAdapter, ButtonAdapter
 from leds.state import create_system
 
 
-def main():
+def main() -> None:
     leds = LedAdapter()
     buttons = ButtonAdapter()
     board = BoardAdapter(leds=leds, buttons=buttons)
@@ -19,5 +19,5 @@ def main():
         app.process(state, event, board)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
