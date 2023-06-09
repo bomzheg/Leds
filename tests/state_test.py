@@ -9,6 +9,7 @@ TEST_COUNT = 7
 def led_state() -> LedState:
     return LedState(False)
 
+
 @pytest.fixture
 def system_state() -> SystemState:
     return SystemState([LedState(False) for _ in range(TEST_COUNT)])
@@ -25,4 +26,3 @@ def test_led_state(led_state: LedState) -> None:
 def test_system_state_press_first_wrong(system_state: SystemState, number: int) -> None:
     system_state.on_press_led(number)
     assert all([not led.on for led in system_state.leds])
-
