@@ -4,3 +4,5 @@
 venv
 venv_wsl
 .ruff_cache
+.mypy_cache
+.pytest_cache
