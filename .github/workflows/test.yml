@@ -21,17 +21,6 @@ jobs:
           cache-dependency-path: test.requirements.txt
       - name: Install dependencies
         run: pip install -r test.requirements.txt
-  lint:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.8'
-          cache: "pip"
-          cache-dependency-path: test.requirements.txt
       - name: black
         run: black --check .
       - name: ruff
@@ -40,16 +29,5 @@ jobs:
         run: run flake8 .
       - name: mypy
         run: run mypy .
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.8'
-          cache: "pip"
-          cache-dependency-path: test.requirements.txt
       - name: Test with pytest
         run: pytest
