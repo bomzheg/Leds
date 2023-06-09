@@ -4,12 +4,13 @@ import RPi.GPIO as gpio  # type: ignore[import]
 import typing
 
 from leds import dto
+from leds.app import LedAdapter, ButtonAdapter, BoardAdapter
 from leds.state import SystemState
 
 COUNT = 7
 
 
-class LedAdapter:
+class LedAdapterGPIO(LedAdapter):
     mapping = {
         1: 1,
         2: 2,
@@ -35,7 +36,7 @@ class LedAdapter:
             gpio.setup(led, gpio.OUT)
 
 
-class ButtonAdapter:
+class ButtonAdapterGPIO(ButtonAdapter):
     mapping = {
         1: 1,
         2: 2,
@@ -54,7 +55,7 @@ class ButtonAdapter:
 
 
 @dataclass
-class BoardAdapter:
+class BoardAdapterGPIO(BoardAdapter):
     leds: LedAdapter
     buttons: ButtonAdapter
 

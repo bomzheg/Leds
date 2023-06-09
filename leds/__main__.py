@@ -2,14 +2,14 @@
 import time
 
 from leds import app
-from leds.adapter import BoardAdapter, LedAdapter, ButtonAdapter
+from leds.adapter import BoardAdapterGPIO, LedAdapterGPIO, ButtonAdapterGPIO
 from leds.state import create_system
 
 
 def main() -> None:
-    leds = LedAdapter()
-    buttons = ButtonAdapter()
-    board = BoardAdapter(leds=leds, buttons=buttons)
+    leds = LedAdapterGPIO()
+    buttons = ButtonAdapterGPIO()
+    board = BoardAdapterGPIO(leds=leds, buttons=buttons)
     board.setup()
     state = create_system()
 
