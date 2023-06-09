@@ -22,7 +22,7 @@ class SystemState:
             if not led.on:
                 self.reset_state()
                 return
-        for led in self.leds[number + 1 :]:
+        for led in self.leds[number + 1:]:
             if led.on:
                 self.reset_state()
                 return
