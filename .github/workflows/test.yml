@@ -21,13 +21,13 @@ jobs:
           cache-dependency-path: test.requirements.txt
       - name: Install dependencies
         run: pip install -r test.requirements.txt
-      - name: ruff
-        run: run ruff .
       - name: black
         run: black --check .
+      - name: ruff
+        run: ruff .
       - name: flake8
-        run: run flake8 .
+        run: flake8 .
       - name: mypy
-        run: run mypy .
+        run: mypy .
       - name: Test with pytest
         run: pytest
