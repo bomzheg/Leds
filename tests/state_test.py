@@ -1,18 +1,7 @@
 import pytest
 
 from leds.state import LedState, SystemState
-
-TEST_COUNT = 7
-
-
-@pytest.fixture
-def led_state() -> LedState:
-    return LedState(False)
-
-
-@pytest.fixture
-def system_state() -> SystemState:
-    return SystemState([LedState(False) for _ in range(TEST_COUNT)])
+from tests.constants import TEST_COUNT
 
 
 def test_led_state(led_state: LedState) -> None:

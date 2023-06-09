@@ -4,7 +4,7 @@ import RPi.GPIO as gpio  # type: ignore[import]
 import typing
 
 from leds import dto
-from leds.app import LedAdapter, ButtonAdapter, BoardAdapter
+from leds.interfaces import LedAdapter, ButtonAdapter, BoardAdapter
 from leds.state import SystemState
 
 COUNT = 7
