@@ -12,6 +12,12 @@ class LedState:
     def turn_on(self) -> None:
         self.on = True
 
+    def __repr__(self) -> str:
+        result = "<Led "
+        result += "✔ " if self.on else "✖"
+        result += ">"
+        return result
+
 
 @dataclass
 class SystemState:
@@ -31,6 +37,13 @@ class SystemState:
     def reset_state(self) -> None:
         for led in self.leds:
             led.reset()
+
+    def __repr__(self) -> str:
+        result = "<System "
+        for led in self.leds:
+            result += "✔ " if led.on else "✖"
+        result += ">"
+        return result
 
 
 def create_system() -> SystemState:
