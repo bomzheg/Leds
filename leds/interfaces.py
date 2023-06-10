@@ -35,5 +35,5 @@ class BoardAdapter(Protocol):
     def get_new_state(self) -> dto.NewState:
         raise NotImplementedError
 
-    def to_state(self, state: SystemState, event: dto.NewState) -> None:
+    def to_state(self, state: SystemState) -> None:
         raise NotImplementedError

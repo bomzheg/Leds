@@ -15,8 +15,10 @@ def main() -> None:
 
     while True:
         time.sleep(0.05)
-        event = board.get_new_state()
-        app.process(state, event, board)
+        pressed = board.get_pressed()
+        if pressed is None:
+            continue
+        app.process(state, pressed, board)
 
 
 if __name__ == "__main__":

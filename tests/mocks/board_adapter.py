@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List, Tuple
+from typing import List
 
 from leds import dto
 from leds.interfaces import BoardAdapter
@@ -15,7 +15,7 @@ class BoardAdapterMock(BoardAdapter):
 
     setup_calls: int = 0
     new_state_results: List[dto.NewState] = field(default_factory=list)
-    to_state_calls: List[Tuple[SystemState, dto.NewState]] = field(default_factory=list)
+    to_state_calls: List[SystemState] = field(default_factory=list)
 
     def setup(self) -> None:
         self.setup_calls += 1
@@ -23,5 +23,5 @@ class BoardAdapterMock(BoardAdapter):
     def get_new_state(self) -> dto.NewState:
         return self.new_state_results.pop()
 
-    def to_state(self, state: SystemState, event: dto.NewState) -> None:
-        self.to_state_calls.append((state, event))
+    def to_state(self, state: SystemState) -> None:
+        self.to_state_calls.append(state)

@@ -70,5 +70,11 @@ class BoardAdapterGPIO(BoardAdapter):
         buttons = [self.buttons.is_pressed(i) for i in range(COUNT)]
         return dto.NewState(leds=leds, buttons=buttons)
 
-    def to_state(self, state: SystemState, event: dto.NewState) -> None:
+    def get_pressed(self) -> typing.Optional[int]:
+        for i in range(COUNT):
+            if self.buttons.is_pressed(i):
+                return i
+        return None
+
+    def to_state(self, state: SystemState) -> None:
         pass
