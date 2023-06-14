@@ -4,19 +4,21 @@ import time
 
 import OPi.GPIO as gpio  # type: ignore[import]
 
+from .infrastructure.consts import PI_PC_MAPPING
+
 logger = logging.getLogger(__name__)
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG
 )
 LED_PIN = 7
-BUTTON_PIN = 12
+BUTTON_PIN = 16
 
 
 def main() -> None:
     gpio.cleanup()
     gpio.setwarnings(True)
     try:
-        gpio.setmode(gpio.BOARD)
+        gpio.setmode(PI_PC_MAPPING)
         gpio.setup(LED_PIN, gpio.OUT)
         gpio.output(LED_PIN, gpio.LOW)
         gpio.setup(BUTTON_PIN, gpio.IN)
@@ -29,7 +31,7 @@ def main() -> None:
 
 def main_loop() -> None:
     while True:
-        if gpio.input(BUTTON_PIN) == gpio.HIGH:
+        if gpio.input(BUTTON_PIN) == gpio.LOW:
             timeout = 0.1
             logger.debug("key pressed")
         else:
