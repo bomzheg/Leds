@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-import RPi.GPIO as gpio  # type: ignore[import]
+import OPi.GPIO as gpio  # type: ignore[import]
 import typing
 
 from leds import dto
