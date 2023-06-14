@@ -80,4 +80,6 @@ exit-zero = true
 strict = true
 exclude = "venv"
 
-
+[[tool.mypy.overrides]]
+module = "OPi.*"
+ignore_missing_imports = true

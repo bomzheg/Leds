@@ -2,7 +2,7 @@
 import logging
 import time
 
-import OPi.GPIO as gpio  # type: ignore[import]
+import OPi.GPIO as gpio
 
 from .infrastructure.consts import PI_PC_MAPPING
 
