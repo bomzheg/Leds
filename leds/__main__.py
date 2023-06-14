@@ -2,7 +2,7 @@
 import time
 
 from leds import app
-from leds.adapter import BoardAdapterGPIO, LedAdapterGPIO, ButtonAdapterGPIO
+from leds.infrastructure.adapter import BoardAdapterGPIO, LedAdapterGPIO, ButtonAdapterGPIO
 from leds.state import create_system
 
 
