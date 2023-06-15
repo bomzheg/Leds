@@ -14,7 +14,7 @@ class LedState:
 
     def __repr__(self) -> str:
         result = "<Led "
-        result += "✔ " if self.on else "✖"
+        result += "1" if self.on else "0"
         result += ">"
         return result
 
@@ -41,7 +41,7 @@ class SystemState:
     def __repr__(self) -> str:
         result = "<System "
         for led in self.leds:
-            result += "✔ " if led.on else "✖"
+            result += "1" if led.on else "0"
         result += ">"
         return result
 
