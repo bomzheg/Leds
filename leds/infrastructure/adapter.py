@@ -29,6 +29,7 @@ class LedAdapterGPIO(LedAdapter):
         assert len(self.mapping) == COUNT
         for led in self.mapping.values():
             gpio.setup(led, gpio.OUT)
+            gpio.output(led, gpio.LOW)
 
 
 class ButtonAdapterGPIO(ButtonAdapter):
