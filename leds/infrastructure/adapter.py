@@ -56,9 +56,10 @@ class BoardAdapterGPIO(BoardAdapter):
     buttons: ButtonAdapter
 
     def setup(self) -> None:
-        gpio.cleanup()
         gpio.setmode(PI_PC_MAPPING)
         gpio.setwarnings(True)
+        gpio.cleanup()
+        gpio.setmode(PI_PC_MAPPING)
         self.leds.setup()
         self.buttons.setup()
 
