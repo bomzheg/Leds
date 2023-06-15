@@ -42,7 +42,7 @@ class ButtonAdapterGPIO(ButtonAdapter):
     }
 
     def is_pressed(self, number: int) -> bool:
-        return typing.cast(bool, gpio.input(self.mapping[number]) == gpio.HIGH)
+        return typing.cast(bool, gpio.input(self.mapping[number]) == gpio.LOW)
 
     def setup(self) -> None:
         assert len(self.mapping) == COUNT
