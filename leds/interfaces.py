@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from typing import Protocol
 
-from leds import dto
+import typing
+
 from leds.state import SystemState
 
 
@@ -11,9 +12,6 @@ class LedAdapter(Protocol):
         raise NotImplementedError
 
     def turn_off(self, number: int) -> None:
-        raise NotImplementedError
-
-    def check_state(self, numer: int) -> bool:
         raise NotImplementedError
 
     def setup(self) -> None:
@@ -32,8 +30,11 @@ class BoardAdapter(Protocol):
     def setup(self) -> None:
         raise NotImplementedError
 
-    def get_new_state(self) -> dto.NewState:
+    def get_pressed(self) -> typing.Optional[int]:
         raise NotImplementedError
 
     def to_state(self, state: SystemState) -> None:
+        raise NotImplementedError
+
+    def cleanup(self) -> None:
         raise NotImplementedError

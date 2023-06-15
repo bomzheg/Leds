@@ -3,7 +3,7 @@ from dataclasses import dataclass
 import OPi.GPIO as gpio
 import typing
 
-from leds import dto
+from leds.infrastructure.consts import PI_PC_MAPPING
 from leds.interfaces import LedAdapter, ButtonAdapter, BoardAdapter
 from leds.state import SystemState
 
@@ -27,9 +27,6 @@ class LedAdapterGPIO(LedAdapter):
     def turn_off(self, number: int) -> None:
         gpio.output(self.mapping[number], gpio.LOW)
 
-    def check_state(self, numer: int) -> bool:
-        return typing.cast(bool, gpio.input(self.mapping[numer]) == gpio.HIGH)
-
     def setup(self) -> None:
         assert len(self.mapping) == COUNT
         for led in self.mapping.values():
@@ -52,6 +49,8 @@ class ButtonAdapterGPIO(ButtonAdapter):
 
     def setup(self) -> None:
         assert len(self.mapping) == COUNT
+        for button in self.mapping.values():
+            gpio.setup(button, gpio.IN)
 
 
 @dataclass
@@ -60,15 +59,11 @@ class BoardAdapterGPIO(BoardAdapter):
     buttons: ButtonAdapter
 
     def setup(self) -> None:
-        gpio.setmode(gpio.BOARD)
-        gpio.setwarnings(False)
+        gpio.cleanup()
+        gpio.setmode(PI_PC_MAPPING)
+        gpio.setwarnings(True)
         self.leds.setup()
         self.buttons.setup()
-
-    def get_new_state(self) -> dto.NewState:
-        leds = [self.leds.check_state(i) for i in range(COUNT)]
-        buttons = [self.buttons.is_pressed(i) for i in range(COUNT)]
-        return dto.NewState(leds=leds, buttons=buttons)
 
     def get_pressed(self) -> typing.Optional[int]:
         for i in range(COUNT):
@@ -78,3 +73,13 @@ class BoardAdapterGPIO(BoardAdapter):
 
     def to_state(self, state: SystemState) -> None:
         pass
+
+    def cleanup(self) -> None:
+        gpio.cleanup()
+
+
+def create_board_adapter() -> BoardAdapter:
+    leds = LedAdapterGPIO()
+    buttons = ButtonAdapterGPIO()
+    board = BoardAdapterGPIO(leds=leds, buttons=buttons)
+    return board
