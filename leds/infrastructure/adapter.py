@@ -72,7 +72,11 @@ class BoardAdapterGPIO(BoardAdapter):
         return None
 
     def to_state(self, state: SystemState) -> None:
-        pass
+        for i, led in enumerate(state.leds):
+            if led.on:
+                self.leds.turn_on(i)
+            else:
+                self.leds.turn_off(i)
 
     def cleanup(self) -> None:
         gpio.cleanup()
