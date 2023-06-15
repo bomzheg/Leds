@@ -2,6 +2,9 @@ from dataclasses import dataclass
 from typing import List
 
 
+COUNT = 5
+
+
 @dataclass
 class LedState:
     on: bool
@@ -47,4 +50,4 @@ class SystemState:
 
 
 def create_system() -> SystemState:
-    return SystemState([LedState(False) for _ in range(7)])
+    return SystemState([LedState(False) for _ in range(COUNT)])

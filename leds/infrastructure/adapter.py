@@ -5,9 +5,7 @@ import typing
 
 from leds.infrastructure.consts import PI_PC_MAPPING
 from leds.interfaces import LedAdapter, ButtonAdapter, BoardAdapter
-from leds.state import SystemState
-
-COUNT = 5
+from leds.state import SystemState, COUNT
 
 
 class LedAdapterGPIO(LedAdapter):
