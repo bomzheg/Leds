@@ -32,20 +32,23 @@ class LedAdapterGPIO(LedAdapter):
 
 class ButtonAdapterGPIO(ButtonAdapter):
     mapping = {
-        0: 16,
-        1: 31,
-        2: 33,
-        3: 35,
-        4: 37,
+        0: 31,
+        1: 33,
+        2: 35,
+        3: 37,
+        4: 16,
     }
 
     def is_pressed(self, number: int) -> bool:
-        return typing.cast(bool, gpio.input(self.mapping[number]) == gpio.LOW)
+        if number == 4:
+            return typing.cast(bool, gpio.input(self.mapping[number]) == gpio.LOW)
+        return typing.cast(bool, gpio.input(self.mapping[number]) == gpio.HIGH)
 
     def setup(self) -> None:
         assert len(self.mapping) == COUNT
         for button in self.mapping.values():
             gpio.setup(button, gpio.IN)
+            gpio.output(button, gpio.LOW)
 
 
 @dataclass
