@@ -7,18 +7,16 @@ from leds.infrastructure.consts import PI_PC_MAPPING
 from leds.interfaces import LedAdapter, ButtonAdapter, BoardAdapter
 from leds.state import SystemState
 
-COUNT = 7
+COUNT = 5
 
 
 class LedAdapterGPIO(LedAdapter):
     mapping = {
-        1: 1,
-        2: 2,
-        3: 3,
-        4: 4,
-        5: 5,
-        6: 6,
-        7: 7,
+        0: 7,
+        1: 12,
+        2: 18,
+        3: 26,
+        4: 29,
     }
 
     def turn_on(self, number: int) -> None:
@@ -35,13 +33,11 @@ class LedAdapterGPIO(LedAdapter):
 
 class ButtonAdapterGPIO(ButtonAdapter):
     mapping = {
-        1: 1,
-        2: 2,
-        3: 3,
-        4: 4,
-        5: 5,
-        6: 6,
-        7: 7,
+        0: 16,
+        1: 31,
+        2: 33,
+        3: 35,
+        4: 37,
     }
 
     def is_pressed(self, number: int) -> bool:
