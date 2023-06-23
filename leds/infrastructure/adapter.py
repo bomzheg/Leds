@@ -40,14 +40,15 @@ class ButtonAdapterGPIO(ButtonAdapter):
     }
 
     def is_pressed(self, number: int) -> bool:
-        if number == 4:
-            return typing.cast(bool, gpio.input(self.mapping[number]) == gpio.LOW)
-        return typing.cast(bool, gpio.input(self.mapping[number]) == gpio.HIGH)
+        return typing.cast(bool, gpio.input(self.mapping[number]) == gpio.LOW)
 
     def setup(self) -> None:
         assert len(self.mapping) == COUNT
         for button in self.mapping.values():
-            gpio.setup(button, gpio.IN)
+            if button == 16:
+                gpio.setup(button, gpio.IN)
+            else:
+                gpio.setup(button, gpio.IN, pull_up_down=gpio.PUD_UP)
 
 
 @dataclass
