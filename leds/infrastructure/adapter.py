@@ -45,10 +45,7 @@ class ButtonAdapterGPIO(ButtonAdapter):
     def setup(self) -> None:
         assert len(self.mapping) == COUNT
         for button in self.mapping.values():
-            if button == 16:
-                gpio.setup(button, gpio.IN)
-            else:
-                gpio.setup(button, gpio.IN, pull_up_down=gpio.PUD_UP)
+            gpio.setup(button, gpio.IN)
 
 
 @dataclass
