@@ -1,0 +1,21 @@
+# /etc/systemd/system/leds.service
+
+[Unit]
+Description=Leds Application Service
+After=network.target
+
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+WorkingDirectory=/home/bomzheg/projects/Leds
+ExecStart=/home/bomzheg/projects/Leds/venv/bin/python -m leds
+TimeoutStartSec=3
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+# sudo cp leds.service /etc/systemd/system/
+# sudo systemctl leds enable
+# sudo systemctl leds start
