@@ -17,5 +17,6 @@ Restart=always
 WantedBy=multi-user.target
 
 # sudo cp leds.service /etc/systemd/system/
-# sudo systemctl leds enable
-# sudo systemctl leds start
+# sudo systemctl enable leds
+# sudo systemctl start leds
+# sudo systemctl daemon-reload
